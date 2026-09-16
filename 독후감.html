@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///C:/Users/User/Desktop/%EB%8F%85%EC%84%9C3.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중학교 독서 수업 - 책별/학생별 독후감 및 우수 기록장 갤러리</title>
+    <style>
+        /* 기본 스타일 리셋 및 폰트 설정 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* 교사 모드 버튼 영역 */
+        .teacher-toggle-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 12px 20px 0 20px;
+            background-color: #eef2f5;
+        }
+
+        .teacher-btn {
+            background-color: #718096;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .teacher-btn:hover {
+            background-color: #4a5568;
+        }
+
+        .teacher-btn.active {
+            background-color: #E53E3E;
+        }
+
+        /* 메인 뷰 전환 탭 (3개 탭) */
+        .main-view-tabs {
+            display: flex;
+            background-color: #eef2f5;
+            border-bottom: 2px solid #cbd5e0;
+        }
+
+        .main-view-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .main-view-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .main-view-btn.active {
+            background-color: #ffffff;
+            color: #4C51BF;
+            border-bottom: 3px solid #4C51BF;
+            font-weight: 800;
+        }
+
+        /* 책 선택 탭 (책별 작성 및 갤러리 공통 스타일) */
+        .book-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #ffffff;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .book-tab-btn {
+            flex: 1 1 auto;
+            padding: 14px 16px;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .book-tab-btn:hover {
+            background-color: #e2e8f0;
+            color: #1a202c;
+        }
+
+        .book-tab-btn.active {
+            background-color: #ffffff;
+            color: #4C51BF;
+            border-bottom: 3px solid #4C51BF;
+            font-weight: 800;
+        }
+
+        /* 콘텐츠 영역 */
+        .content-area {
+            padding: 30px 20px;
+        }
+
+        .current-book-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* 서브 탭 (페이지 범위 선택) */
+        .page-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .page-tab-btn {
+            padding: 8px 16px;
+            border: 1px solid #cbd5e0;
+            border-radius: 20px;
+            background-color: #f7fafc;
+            color: #4a5568;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .page-tab-btn:hover {
+            background-color: #edf2f7;
+        }
+
+        .page-tab-btn.active {
+            background-color: #4C51BF;
+            color: white;
+            border-color: #4C51BF;
+            font-weight: bold;
+        }
+
+        /* 작성 및 업로드 폼 */
+        .review-form {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4a5568;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="file"] {
+            background-color: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background-color: #48BB78;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #38A169;
+        }
+
+        /* 목록 타이틀 */
+        .review-list-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #2d3748;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .teacher-status-tag {
+            font-size: 0.8rem;
+            background-color: #FEB2B2;
+            color: #9B2C2C;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* 후기 카드 */
+        .review-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #4C51BF;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #718096;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 0.95rem;
+        }
+
+        .book-tag {
+            display: inline-block;
+            background-color: #EDF2F7;
+            color: #4A5568;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 6px;
+            font-weight: 600;
+        }
+
+        .review-body {
+            white-space: pre-wrap;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .delete-btn {
+            background-color: #FED7D7;
+            border: 1px solid #FEB2B2;
+            color: #E53E3E;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #E53E3E;
+            color: white;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: #a0aec0;
+            padding: 30px 0;
+            width: 100%;
+        }
+
+        /* 학생별 모아보기 전용 스타일 */
+        .student-select-container {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .student-select-container label {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .student-select-container select {
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e0;
+            font-size: 0.95rem;
+            min-width: 250px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .student-summary-count {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-left: auto;
+        }
+
+        /* 갤러리 그리드 레이아웃 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .gallery-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        }
+
+        .gallery-img-container {
+            width: 100%;
+            height: 220px;
+            background-color: #edf2f7;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .gallery-author {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 6px;
+        }
+
+        .gallery-desc {
+            font-size: 0.88rem;
+            color: #4a5568;
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            flex-grow: 1;
+        }
+
+        .gallery-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #a0aec0;
+            border-top: 1px solid #edf2f7;
+            padding-top: 8px;
+        }
+
+        /* 이미지 확대 모달 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>📚 즐거운 독서 수업 기록장</h1>
+        <p>함께 읽고 생각하며 자라는 독서 수업 활동 공간입니다.</p>
+    </header>
+
+    <!-- 교사 모드 접속 버튼 -->
+    <div class="teacher-toggle-container">
+        <button id="teacherBtn" class="teacher-btn" onclick="toggleTeacherMode()">🔒 교사 모드 로그인</button>
+    </div>
+
+    <!-- 메인 뷰 전환 탭 (3개 탭) -->
+    <div class="main-view-tabs">
+        <button id="viewBookBtn" class="main-view-btn" onclick="switchMainView('book')">📖 책별 / 쪽수별 작성</button>
+        <button id="viewStudentBtn" class="main-view-btn" onclick="switchMainView('student')">👤 학생별 모아보기</button>
+        <button id="viewGalleryBtn" class="main-view-btn active" onclick="switchMainView('gallery')">📸 우수 독서기록장 갤러리</button>
+    </div>
+
+    <!-- [뷰 1] 책별 / 쪽수별 작성 화면 -->
+    <div id="bookViewArea" style="display: none;">
+        <nav class="book-tabs" id="bookTabs"><button class="book-tab-btn active">여름을 한 입 베어물었더니</button><button class="book-tab-btn ">율의 시선</button><button class="book-tab-btn ">우리는 마이너스 2야</button><button class="book-tab-btn ">소금아이</button><button class="book-tab-btn ">리와인드 베이커리</button><button class="book-tab-btn ">이 망할 열네 살</button><button class="book-tab-btn ">하면 좀 어떤 사이</button></nav>
+        <div class="content-area">
+            <h2 class="current-book-title" id="currentBookTitle">📖 [여름을 한 입 베어물었더니]</h2>
+            <div class="page-tabs" id="pageTabs"><button class="page-tab-btn active">1~30쪽</button><button class="page-tab-btn ">31~60쪽</button><button class="page-tab-btn ">61~90쪽</button><button class="page-tab-btn ">91쪽~120쪽</button><button class="page-tab-btn ">121쪽~150쪽</button><button class="page-tab-btn ">151쪽~</button></div>
+            
+            <div class="review-form">
+                <div class="form-group">
+                    <label for="studentName">이름 (또는 학번/별명)</label>
+                    <input type="text" id="studentName" placeholder="예: 2학년 1반 김독서">
+                </div>
+                <div class="form-group">
+                    <label for="reviewContent">독후감 / 생각 작성하기</label>
+                    <textarea id="reviewContent" placeholder="이 구간을 읽고 인상 깊었던 문장이나 느낌, 생각을 자유롭게 적어보세요."></textarea>
+                </div>
+                <button class="submit-btn" onclick="addReview()">등록하기</button>
+            </div>
+
+            <div class="review-list-title">
+                <span>💬 친구들의 감상평 목록</span>
+                <span id="teacherTagBook" class="teacher-status-tag" style="display: none;">🔑 교사 모드 관리 중</span>
+            </div>
+            <div id="reviewList"><div class="no-reviews">아직 작성된 감상평이 없습니다.<br>첫 번째 후기를 작성해 보세요!</div></div>
+        </div>
+    </div>
+
+    <!-- [뷰 2] 학생별 모아보기 화면 -->
+    <div id="studentViewArea" style="display: none;">
+        <div class="content-area">
+            <div class="student-select-container">
+                <label for="studentSelect">학생 선택:</label>
+                <select id="studentSelect" onchange="filterAndDisplayStudentReviews()"><option value="ALL">-- 전체 학생 보기 --</option></select>
+                <span id="studentSummaryCount" class="student-summary-count">총 0개 작성됨</span>
+            </div>
+
+            <div class="review-list-title">
+                <span>📋 학생별 감상평 모음</span>
+                <span id="teacherTagStudent" class="teacher-status-tag" style="display: none;">🔑 교사 모드 관리 중</span>
+            </div>
+            <div id="studentReviewList"><div class="no-reviews">작성된 감상평이 없습니다.</div></div>
+        </div>
+    </div>
+
+    <!-- [뷰 3] 우수 독서기록장 갤러리 화면 -->
+    <div id="galleryViewArea" style="display: block;">
+        <!-- 갤러리 내 책 선택 서브 탭 -->
+        <nav class="book-tabs" id="galleryBookTabs"><button class="book-tab-btn active">여름을 한 입 베어물었더니</button><button class="book-tab-btn ">율의 시선</button><button class="book-tab-btn ">우리는 마이너스 2야</button><button class="book-tab-btn ">소금아이</button><button class="book-tab-btn ">리와인드 베이커리</button><button class="book-tab-btn ">이 망할 열네 살</button><button class="book-tab-btn ">하면 좀 어떤 사이</button></nav>
+        
+        <div class="content-area">
+            <h2 class="current-book-title" id="galleryBookTitle">🏆 [여름을 한 입 베어물었더니] 우수 독서기록장</h2>
+
+            <!-- 갤러리 업로드 폼 -->
+            <div class="review-form">
+                <div class="form-group">
+                    <label for="galleryStudentName">우수 학생 이름 (학번)</label>
+                    <input type="text" id="galleryStudentName" placeholder="예: 2학년 3반 이우수">
+                </div>
+                <div class="form-group">
+                    <label for="galleryDesc">칭찬 포인트 / 설명</label>
+                    <input type="text" id="galleryDesc" placeholder="예: 질문에 대한 깊이 있는 통찰과 그림 서술이 우수함">
+                </div>
+                <div class="form-group">
+                    <label for="galleryImageFile">종이 독서기록장 사진 업로드</label>
+                    <input type="file" id="galleryImageFile" accept="image/*">
+                </div>
+                <button class="submit-btn" onclick="uploadGalleryPhoto()">📸 갤러리에 등록하기</button>
+            </div>
+
+            <div class="review-list-title">
+                <span>🏆 자랑스러운 우수 독서기록장 목록</span>
+                <span id="teacherTagGallery" class="teacher-status-tag" style="display: none;">🔑 교사 모드 관리 중</span>
+            </div>
+            
+            <div id="galleryGrid" class="gallery-grid"><div class="no-reviews">등록된 우수 독서기록장이 없습니다.<br>학생들의 멋진 작품을 공유해 보세요!</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- 이미지 클릭 확대 모달 -->
+<div id="imageModal" class="modal-overlay" onclick="closeModal()">
+    <img id="modalImg" class="modal-content" src="file:///C:/Users/User/Desktop/%EB%8F%85%EC%84%9C3.html" alt="확대 이미지">
+</div>
+
+<script>
+    // 1. 책 목록 데이터
+    const books = [
+        "여름을 한 입 베어물었더니",
+        "율의 시선",
+        "우리는 마이너스 2야",
+        "소금아이",
+        "리와인드 베이커리",
+        "이 망할 열네 살",
+        "하면 좀 어떤 사이"
+    ];
+
+    // 2. 페이지 범위 데이터
+    const pageRanges = [
+        "1~30쪽",
+        "31~60쪽",
+        "61~90쪽",
+        "91쪽~120쪽",
+        "121쪽~150쪽",
+        "151쪽~"
+    ];
+
+    const TEACHER_PASSWORD = "1501";
+
+    // 상태 변수
+    let currentBookIndex = 0;
+    let currentPageIndex = 0;
+    let currentGalleryBookIndex = 0;
+    let isTeacherMode = false;
+    let currentMainView = 'book'; // 'book', 'student', 'gallery'
+
+    window.onload = function() {
+        renderBookTabs();
+        renderGalleryBookTabs();
+        selectBook(0);
+    };
+
+    // 메인 뷰 전환 (책별 / 학생별 / 갤러리)
+    function switchMainView(view) {
+        currentMainView = view;
+        const bookArea = document.getElementById('bookViewArea');
+        const studentArea = document.getElementById('studentViewArea');
+        const galleryArea = document.getElementById('galleryViewArea');
+
+        const btnBook = document.getElementById('viewBookBtn');
+        const btnStudent = document.getElementById('viewStudentBtn');
+        const btnGallery = document.getElementById('viewGalleryBtn');
+
+        bookArea.style.display = 'none';
+        studentArea.style.display = 'none';
+        galleryArea.style.display = 'none';
+
+        btnBook.classList.remove('active');
+        btnStudent.classList.remove('active');
+        btnGallery.classList.remove('active');
+
+        if (view === 'book') {
+            bookArea.style.display = 'block';
+            btnBook.classList.add('active');
+            loadReviews();
+        } else if (view === 'student') {
+            studentArea.style.display = 'block';
+            btnStudent.classList.add('active');
+            renderStudentView();
+        } else if (view === 'gallery') {
+            galleryArea.style.display = 'block';
+            btnGallery.classList.add('active');
+            selectGalleryBook(currentGalleryBookIndex);
+        }
+    }
+
+    // 교사 모드 토글
+    function toggleTeacherMode() {
+        if (isTeacherMode) {
+            isTeacherMode = false;
+            updateTeacherUI();
+            alert("교사 모드가 해제되었습니다.");
+        } else {
+            const inputPassword = prompt("교사 모드 비밀번호를 입력하세요:");
+            if (inputPassword === TEACHER_PASSWORD) {
+                isTeacherMode = true;
+                updateTeacherUI();
+                alert("교사 모드로 전환되었습니다.");
+            } else if (inputPassword !== null) {
+                alert("비밀번호가 올바르지 않습니다.");
+            }
+        }
+    }
+
+    function updateTeacherUI() {
+        const teacherBtn = document.getElementById('teacherBtn');
+        const teacherTagBook = document.getElementById('teacherTagBook');
+        const teacherTagStudent = document.getElementById('teacherTagStudent');
+        const teacherTagGallery = document.getElementById('teacherTagGallery');
+
+        if (isTeacherMode) {
+            teacherBtn.innerText = "🔓 교사 모드 OFF (로그아웃)";
+            teacherBtn.classList.add('active');
+            teacherTagBook.style.display = 'inline-block';
+            teacherTagStudent.style.display = 'inline-block';
+            teacherTagGallery.style.display = 'inline-block';
+        } else {
+            teacherBtn.innerText = "🔒 교사 모드 로그인";
+            teacherBtn.classList.remove('active');
+            teacherTagBook.style.display = 'none';
+            teacherTagStudent.style.display = 'none';
+            teacherTagGallery.style.display = 'none';
+        }
+
+        if (currentMainView === 'book') loadReviews();
+        else if (currentMainView === 'student') filterAndDisplayStudentReviews();
+        else if (currentMainView === 'gallery') loadGalleryImages();
+    }
+
+    // --- [1] 책별 / 쪽수별 감상평 작성 기능 ---
+    function renderBookTabs() {
+        const bookTabsNav = document.getElementById('bookTabs');
+        bookTabsNav.innerHTML = '';
+        books.forEach((book, index) => {
+            const btn = document.createElement('button');
+            btn.className = `book-tab-btn ${index === currentBookIndex ? 'active' : ''}`;
+            btn.innerText = book;
+            btn.onclick = () => selectBook(index);
+            bookTabsNav.appendChild(btn);
+        });
+    }
+
+    function selectBook(index) {
+        currentBookIndex = index;
+        document.getElementById('currentBookTitle').innerText = `📖 [${books[index]}]`;
+        currentPageIndex = 0;
+        renderBookTabs();
+        renderPageTabs();
+        loadReviews();
+    }
+
+    function renderPageTabs() {
+        const pageTabsDiv = document.getElementById('pageTabs');
+        pageTabsDiv.innerHTML = '';
+        pageRanges.forEach((range, index) => {
+            const btn = document.createElement('button');
+            btn.className = `page-tab-btn ${index === currentPageIndex ? 'active' : ''}`;
+            btn.innerText = range;
+            btn.onclick = () => selectPage(index);
+            pageTabsDiv.appendChild(btn);
+        });
+    }
+
+    function selectPage(index) {
+        currentPageIndex = index;
+        renderPageTabs();
+        loadReviews();
+    }
+
+    function getStorageKey(bIdx = currentBookIndex, pIdx = currentPageIndex) {
+        return `review_book_${bIdx}_page_${pIdx}`;
+    }
+
+    function addReview() {
+        const nameInput = document.getElementById('studentName');
+        const contentInput = document.getElementById('reviewContent');
+        const name = nameInput.value.trim();
+        const content = contentInput.value.trim();
+
+        if (!name || !content) {
+            alert('이름과 작성 내용을 모두 입력해주세요!');
+            return;
+        }
+
+        const now = new Date();
+        const timeString = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const newReview = { id: Date.now(), name: name, content: content, date: timeString };
+        const key = getStorageKey();
+        const reviews = JSON.parse(localStorage.getItem(key) || '[]');
+        reviews.unshift(newReview);
+        localStorage.setItem(key, JSON.stringify(reviews));
+
+        contentInput.value = '';
+        loadReviews();
+    }
+
+    function loadReviews() {
+        const reviewListDiv = document.getElementById('reviewList');
+        const key = getStorageKey();
+        const reviews = JSON.parse(localStorage.getItem(key) || '[]');
+
+        if (reviews.length === 0) {
+            reviewListDiv.innerHTML = '<div class="no-reviews">아직 작성된 감상평이 없습니다.<br>첫 번째 후기를 작성해 보세요!</div>';
+            return;
+        }
+
+        reviewListDiv.innerHTML = '';
+        reviews.forEach(review => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            const deleteButtonHtml = isTeacherMode 
+                ? `<button class="delete-btn" onclick="deleteReview('${key}', ${review.id})">삭제</button>` 
+                : '';
+
+            card.innerHTML = `
+                <div class="review-header">
+                    <span class="review-author">${escapeHtml(review.name)}</span>
+                    <div>
+                        <span>${review.date}</span>
+                        ${deleteButtonHtml}
+                    </div>
+                </div>
+                <div class="review-body">${escapeHtml(review.content)}</div>
+            `;
+            reviewListDiv.appendChild(card);
+        });
+    }
+
+    // --- [2] 학생별 모아보기 기능 ---
+    function getAllReviews() {
+        const allReviews = [];
+        for (let b = 0; b < books.length; b++) {
+            for (let p = 0; p < pageRanges.length; p++) {
+                const key = getStorageKey(b, p);
+                const reviews = JSON.parse(localStorage.getItem(key) || '[]');
+                reviews.forEach(r => {
+                    allReviews.push({ ...r, bookTitle: books[b], pageRange: pageRanges[p], storageKey: key });
+                });
+            }
+        }
+        return allReviews;
+    }
+
+    function renderStudentView() {
+        const allReviews = getAllReviews();
+        const studentSelect = document.getElementById('studentSelect');
+        const selectedValueBefore = studentSelect.value;
+
+        const namesSet = new Set();
+        allReviews.forEach(r => {
+            if (r.name && r.name.trim() !== '') namesSet.add(r.name.trim());
+        });
+        const sortedNames = Array.from(namesSet).sort();
+
+        studentSelect.innerHTML = '<option value="ALL">-- 전체 학생 보기 --</option>';
+        sortedNames.forEach(name => {
+            const opt = document.createElement('option');
+            opt.value = name;
+            opt.innerText = name;
+            studentSelect.appendChild(opt);
+        });
+
+        if (sortedNames.includes(selectedValueBefore)) {
+            studentSelect.value = selectedValueBefore;
+        }
+        filterAndDisplayStudentReviews();
+    }
+
+    function filterAndDisplayStudentReviews() {
+        const selectedName = document.getElementById('studentSelect').value;
+        const allReviews = getAllReviews();
+        const studentReviewList = document.getElementById('studentReviewList');
+        const countSpan = document.getElementById('studentSummaryCount');
+
+        let filtered = allReviews;
+        if (selectedName !== 'ALL') {
+            filtered = allReviews.filter(r => r.name.trim() === selectedName);
+        }
+
+        filtered.sort((a, b) => b.id - a.id);
+        countSpan.innerText = `총 ${filtered.length}개 작성됨`;
+
+        if (filtered.length === 0) {
+            studentReviewList.innerHTML = '<div class="no-reviews">작성된 감상평이 없습니다.</div>';
+            return;
+        }
+
+        studentReviewList.innerHTML = '';
+        filtered.forEach(review => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            const deleteButtonHtml = isTeacherMode 
+                ? `<button class="delete-btn" onclick="deleteReview('${review.storageKey}', ${review.id})">삭제</button>` 
+                : '';
+
+            card.innerHTML = `
+                <div class="review-header">
+                    <div>
+                        <span class="review-author">${escapeHtml(review.name)}</span>
+                        <span class="book-tag">📖 ${escapeHtml(review.bookTitle)} (${escapeHtml(review.pageRange)})</span>
+                    </div>
+                    <div>
+                        <span>${review.date}</span>
+                        ${deleteButtonHtml}
+                    </div>
+                </div>
+                <div class="review-body">${escapeHtml(review.content)}</div>
+            `;
+            studentReviewList.appendChild(card);
+        });
+    }
+
+    // --- [3] 우수 독서기록장 갤러리 기능 ---
+    function renderGalleryBookTabs() {
+        const gTabsNav = document.getElementById('galleryBookTabs');
+        gTabsNav.innerHTML = '';
+        books.forEach((book, index) => {
+            const btn = document.createElement('button');
+            btn.className = `book-tab-btn ${index === currentGalleryBookIndex ? 'active' : ''}`;
+            btn.innerText = book;
+            btn.onclick = () => selectGalleryBook(index);
+            gTabsNav.appendChild(btn);
+        });
+    }
+
+    function selectGalleryBook(index) {
+        currentGalleryBookIndex = index;
+        document.getElementById('galleryBookTitle').innerText = `🏆 [${books[index]}] 우수 독서기록장`;
+        renderGalleryBookTabs();
+        loadGalleryImages();
+    }
+
+    function getGalleryStorageKey(bIdx = currentGalleryBookIndex) {
+        return `gallery_book_${bIdx}`;
+    }
+
+    // 이미지 리사이즈 및 등록 (LocalStorage 용량 최적화)
+    function uploadGalleryPhoto() {
+        const nameInput = document.getElementById('galleryStudentName');
+        const descInput = document.getElementById('galleryDesc');
+        const fileInput = document.getElementById('galleryImageFile');
+
+        const name = nameInput.value.trim();
+        const desc = descInput.value.trim();
+        const file = fileInput.files[0];
+
+        if (!name || !file) {
+            alert('학생 이름과 사진 파일을 선택해주세요!');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                // 이미지 압축 (최대 너비 800px로 조절하여 저장 공간 확보)
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                const maxWidth = 800;
+
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                const base64Image = canvas.toDataURL('image/jpeg', 0.85);
+
+                const now = new Date();
+                const timeString = `${now.getMonth() + 1}/${now.getDate()}`;
+
+                const newGalleryItem = {
+                    id: Date.now(),
+                    name: name,
+                    desc: desc,
+                    imgData: base64Image,
+                    date: timeString
+                };
+
+                const key = getGalleryStorageKey();
+                try {
+                    const items = JSON.parse(localStorage.getItem(key) || '[]');
+                    items.unshift(newGalleryItem);
+                    localStorage.setItem(key, JSON.stringify(items));
+
+                    nameInput.value = '';
+                    descInput.value = '';
+                    fileInput.value = '';
+
+                    loadGalleryImages();
+                } catch (err) {
+                    alert('저장 용량이 초과되었습니다! 교사 모드에서 이전 사진을 일부 삭제해 주세요.');
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function loadGalleryImages() {
+        const grid = document.getElementById('galleryGrid');
+        const key = getGalleryStorageKey();
+        const items = JSON.parse(localStorage.getItem(key) || '[]');
+
+        if (items.length === 0) {
+            grid.innerHTML = '<div class="no-reviews">등록된 우수 독서기록장이 없습니다.<br>학생들의 멋진 작품을 공유해 보세요!</div>';
+            return;
+        }
+
+        grid.innerHTML = '';
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'gallery-card';
+
+            const deleteBtnHtml = isTeacherMode 
+                ? `<button class="delete-btn" onclick="deleteGalleryItem('${key}', ${item.id})">삭제</button>` 
+                : '';
+
+            card.innerHTML = `
+                <div class="gallery-img-container" onclick="openModal('${item.imgData}')">
+                    <img src="${item.imgData}" alt="${escapeHtml(item.name)}의 독서기록장">
+                </div>
+                <div class="gallery-info">
+                    <div class="gallery-author">${escapeHtml(item.name)}</div>
+                    <div class="gallery-desc">${escapeHtml(item.desc || '')}</div>
+                    <div class="gallery-footer">
+                        <span>등록일: ${item.date}</span>
+                        ${deleteBtnHtml}
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function deleteGalleryItem(key, id) {
+        if (!isTeacherMode) {
+            alert("삭제 권한이 없습니다.");
+            return;
+        }
+        if (!confirm('이 갤러리 항목을 삭제하시겠습니까?')) return;
+
+        let items = JSON.parse(localStorage.getItem(key) || '[]');
+        items = items.filter(item => item.id !== id);
+        localStorage.setItem(key, JSON.stringify(items));
+        loadGalleryImages();
+    }
+
+    // --- 공통 및 유틸리티 ---
+    function deleteReview(key, id) {
+        if (!isTeacherMode) {
+            alert("삭제 권한이 없습니다. 교사 모드로 전환해주세요.");
+            return;
+        }
+        if (!confirm('해당 감상평을 정말 삭제하시겠습니까?')) return;
+
+        let reviews = JSON.parse(localStorage.getItem(key) || '[]');
+        reviews = reviews.filter(r => r.id !== id);
+        localStorage.setItem(key, JSON.stringify(reviews));
+
+        if (currentMainView === 'book') loadReviews();
+        else renderStudentView();
+    }
+
+    function openModal(imgSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        modalImg.src = imgSrc;
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+</script>
+
+
+</body></html>
